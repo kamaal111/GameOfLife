@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Python
 
 struct ContentView: View {
     @StateObject private var gameOfLive = GameOfLife(universe: .init(rows: 4, columns: 4))
@@ -41,21 +40,25 @@ class GameOfLife: ObservableObject {
 struct Universe {
     let rows: Int
     let columns: Int
-    private var representation: [UInt8]
+    private var cells: [Cell]
 
     init(rows: Int, columns: Int) {
         self.rows = rows
         self.columns = columns
-        self.representation = [UInt8](repeating: 0, count: rows * columns)
+        self.cells = [Cell](repeating: .dead, count: rows * columns)
+    }
+
+    enum Cell: UInt8 {
+        case dead = 0
+        case alive = 1
     }
 
     func cellIsAlive(row: Int, column: Int) -> Bool {
-        let item = representation[index(row: row, column: column)]
-        return item == 1
+        cells[index(row: row, column: column)] == .alive
     }
 
     mutating func activateCell(row: Int, column: Int) {
-        representation[index(row: row, column: column)] = 1
+        cells[index(row: row, column: column)] = .alive
     }
 
     private func index(row: Int, column: Int) -> Int {
