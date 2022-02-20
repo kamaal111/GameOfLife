@@ -9,6 +9,8 @@ import SpriteKit
 
 class GameScene: SKScene {
 
+    private var universe = Universe(height: 64, width: 64)
+
     class func newGameScene() -> GameScene {
         let scene = GameScene()
         // Set the scale mode to scale to fit the window
