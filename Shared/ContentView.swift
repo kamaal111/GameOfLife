@@ -6,25 +6,33 @@
 //
 
 import SwiftUI
+import ShrimpExtensions
 
 struct ContentView: View {
-    @StateObject private var gameOfLive = GameOfLife(universe: .init(height: 5, width: 5))
+    @StateObject private var gameOfLive = GameOfLife(universe: .init(height: 64, width: 64))
 
     var body: some View {
-        GridStack(rows: gameOfLive.universe.height, columns: gameOfLive.universe.width, content: { x, y in
-            CellView(cell: gameOfLive.universe.getCell(x: x, y: y))
-        })
-            .frame(minWidth: 300, minHeight: 300)
+        VStack {
+            GridStack(
+                rows: gameOfLive.universe.height,
+                columns: gameOfLive.universe.width,
+                spacing: 4,
+                content: { x, y in
+                    CellView(cell: gameOfLive.universe.getCell(x: x, y: y), size: .squared(4))
+                })
+        }
+        .padding(.all, 16)
+        .frame(minWidth: 300, minHeight: 300)
     }
 }
 
 struct CellView: View {
     let cell: Universe.Cell
+    let size: CGSize
 
     var body: some View {
-        ZStack {
-            cell.color
-        }
+        cell.color
+            .frame(width: size.width, height: size.height)
     }
 }
 
