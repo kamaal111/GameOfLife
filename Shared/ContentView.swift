@@ -180,10 +180,6 @@ struct Universe {
         cells[getIndex(x: x, y: y)]
     }
 
-    private mutating func activateCell(x: Int, y: Int) {
-        cells[getIndex(x: x, y: y)] = .alive
-    }
-
     private func liveNeighborCount(x: Int, y: Int) -> Int {
         var count = 0
         for deltaRow in [height - 1, 0, 1] {
