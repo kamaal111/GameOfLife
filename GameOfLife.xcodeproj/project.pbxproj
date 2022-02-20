@@ -23,13 +23,6 @@
 		2C6D309F27C2CCFD004ECBDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D309E27C2CCFD004ECBDE /* AppDelegate.swift */; };
 		2C6D30A127C2CCFD004ECBDE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D30A027C2CCFD004ECBDE /* GameViewController.swift */; };
 		2C6D30A427C2CCFD004ECBDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D30A227C2CCFD004ECBDE /* Main.storyboard */; };
-		2C6D30A627C2CCFD004ECBDE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305B27C2CCEB004ECBDE /* Actions.sks */; };
-		2C6D30A727C2CCFD004ECBDE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305B27C2CCEB004ECBDE /* Actions.sks */; };
-		2C6D30A827C2CCFD004ECBDE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305B27C2CCEB004ECBDE /* Actions.sks */; };
-		2C6D30A927C2CCFD004ECBDE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305C27C2CCEB004ECBDE /* GameScene.sks */; };
-		2C6D30AA27C2CCFD004ECBDE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305C27C2CCEB004ECBDE /* GameScene.sks */; };
-		2C6D30AB27C2CCFD004ECBDE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305C27C2CCEB004ECBDE /* GameScene.sks */; };
-		2C6D30AC27C2CCFD004ECBDE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2C6D305C27C2CCEB004ECBDE /* GameScene.sks */; };
 		2C6D30AD27C2CCFD004ECBDE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D305D27C2CCEB004ECBDE /* GameScene.swift */; };
 		2C6D30AE27C2CCFD004ECBDE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D305D27C2CCEB004ECBDE /* GameScene.swift */; };
 		2C6D30AF27C2CCFD004ECBDE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D305D27C2CCEB004ECBDE /* GameScene.swift */; };
@@ -83,8 +76,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C6D305B27C2CCEB004ECBDE /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		2C6D305C27C2CCEB004ECBDE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		2C6D305D27C2CCEB004ECBDE /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		2C6D305E27C2CCFC004ECBDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C6D306327C2CCFC004ECBDE /* GameOfLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOfLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,12 +136,12 @@
 		2C6D305527C2CCEB004ECBDE = {
 			isa = PBXGroup;
 			children = (
-				2C6D305A27C2CCEB004ECBDE /* GameOfLife Shared */,
 				2C6D306527C2CCFC004ECBDE /* GameOfLife iOS */,
+				2C6D309D27C2CCFD004ECBDE /* GameOfLife macOS */,
+				2C6D305A27C2CCEB004ECBDE /* GameOfLife Shared */,
+				2C6D308D27C2CCFD004ECBDE /* GameOfLife tvOS */,
 				2C6D307627C2CCFD004ECBDE /* GameOfLife watchOS App */,
 				2C6D308227C2CCFD004ECBDE /* GameOfLife watchOS App Extension */,
-				2C6D308D27C2CCFD004ECBDE /* GameOfLife tvOS */,
-				2C6D309D27C2CCFD004ECBDE /* GameOfLife macOS */,
 				2C6D306427C2CCFC004ECBDE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,8 +149,6 @@
 		2C6D305A27C2CCEB004ECBDE /* GameOfLife Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2C6D305B27C2CCEB004ECBDE /* Actions.sks */,
-				2C6D305C27C2CCEB004ECBDE /* GameScene.sks */,
 				2C6D305D27C2CCEB004ECBDE /* GameScene.swift */,
 				2C6D305E27C2CCFC004ECBDE /* Assets.xcassets */,
 			);
@@ -183,8 +172,8 @@
 			children = (
 				2C6D306627C2CCFC004ECBDE /* AppDelegate.swift */,
 				2C6D306827C2CCFC004ECBDE /* GameViewController.swift */,
-				2C6D306A27C2CCFC004ECBDE /* Main.storyboard */,
 				2C6D306D27C2CCFC004ECBDE /* LaunchScreen.storyboard */,
+				2C6D306A27C2CCFC004ECBDE /* Main.storyboard */,
 			);
 			path = "GameOfLife iOS";
 			sourceTree = "<group>";
@@ -200,9 +189,9 @@
 		2C6D308227C2CCFD004ECBDE /* GameOfLife watchOS App Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2C6D308327C2CCFD004ECBDE /* InterfaceController.swift */,
-				2C6D308527C2CCFD004ECBDE /* ExtensionDelegate.swift */,
 				2C6D308727C2CCFD004ECBDE /* Info.plist */,
+				2C6D308527C2CCFD004ECBDE /* ExtensionDelegate.swift */,
+				2C6D308327C2CCFD004ECBDE /* InterfaceController.swift */,
 			);
 			path = "GameOfLife watchOS App Extension";
 			sourceTree = "<group>";
@@ -212,8 +201,8 @@
 			children = (
 				2C6D308E27C2CCFD004ECBDE /* AppDelegate.swift */,
 				2C6D309027C2CCFD004ECBDE /* GameViewController.swift */,
-				2C6D309227C2CCFD004ECBDE /* Main.storyboard */,
 				2C6D309527C2CCFD004ECBDE /* LaunchScreen.storyboard */,
+				2C6D309227C2CCFD004ECBDE /* Main.storyboard */,
 			);
 			path = "GameOfLife tvOS";
 			sourceTree = "<group>";
@@ -221,10 +210,10 @@
 		2C6D309D27C2CCFD004ECBDE /* GameOfLife macOS */ = {
 			isa = PBXGroup;
 			children = (
+				2C6D30A527C2CCFD004ECBDE /* GameOfLife_macOS.entitlements */,
 				2C6D309E27C2CCFD004ECBDE /* AppDelegate.swift */,
 				2C6D30A027C2CCFD004ECBDE /* GameViewController.swift */,
 				2C6D30A227C2CCFD004ECBDE /* Main.storyboard */,
-				2C6D30A527C2CCFD004ECBDE /* GameOfLife_macOS.entitlements */,
 			);
 			path = "GameOfLife macOS";
 			sourceTree = "<group>";
@@ -373,9 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6D30A927C2CCFD004ECBDE /* GameScene.sks in Resources */,
 				2C6D306C27C2CCFC004ECBDE /* Main.storyboard in Resources */,
-				2C6D30A627C2CCFD004ECBDE /* Actions.sks in Resources */,
 				2C6D306F27C2CCFC004ECBDE /* LaunchScreen.storyboard in Resources */,
 				2C6D30B127C2CCFD004ECBDE /* Assets.xcassets in Resources */,
 			);
@@ -394,7 +381,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6D30AA27C2CCFD004ECBDE /* GameScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,9 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6D30AB27C2CCFD004ECBDE /* GameScene.sks in Resources */,
 				2C6D309427C2CCFD004ECBDE /* Main.storyboard in Resources */,
-				2C6D30A727C2CCFD004ECBDE /* Actions.sks in Resources */,
 				2C6D309727C2CCFD004ECBDE /* LaunchScreen.storyboard in Resources */,
 				2C6D30B327C2CCFD004ECBDE /* Assets.xcassets in Resources */,
 			);
@@ -415,9 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C6D30A427C2CCFD004ECBDE /* Main.storyboard in Resources */,
-				2C6D30AC27C2CCFD004ECBDE /* GameScene.sks in Resources */,
 				2C6D30B427C2CCFD004ECBDE /* Assets.xcassets in Resources */,
-				2C6D30A827C2CCFD004ECBDE /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
