@@ -51,10 +51,21 @@ struct Universe {
     let width: Int
     private var cells: [Cell]
 
-    init(height: Int, width: Int) {
+    private init(height: Int, width: Int, cells: [Cell]) {
         self.height = height
         self.width = width
-        self.cells = [Cell](repeating: .dead, count: height * width)
+        self.cells = cells
+    }
+
+    init(height: Int, width: Int) {
+        let cells: [Cell] = (0..<(height * width))
+            .map({
+                if $0 % 2 == 0 || $0 % 7 == 0 {
+                    return .alive
+                }
+                return .dead
+            })
+        self.init(height: height, width: width, cells: cells)
     }
 
     enum Cell: UInt8 {
