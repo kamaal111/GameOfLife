@@ -39,6 +39,13 @@ struct Universe {
         var isAlive: Bool { self == .alive }
         #if canImport(SpriteKit)
         var color: SKColor { isAlive ? .black : .white }
+
+        func skNode(rect: CGRect) -> SKShapeNode {
+            let node = SKShapeNode(rect: rect)
+            node.fillColor = .red
+            node.strokeColor = .clear
+            return node
+        }
         #endif
     }
 
@@ -47,7 +54,6 @@ struct Universe {
 
         for row in 0..<height {
             for column in 0..<width {
-                let index = getIndex(x: row, y: column)
                 let cell = getCell(x: row, y: column)
                 let liveNeighbors = liveNeighborCount(x: row, y: column)
 
@@ -69,6 +75,7 @@ struct Universe {
                 default: nextCell = cell
                 }
 
+                let index = getIndex(x: row, y: column)
                 next[index] = nextCell
             }
         }
