@@ -12,26 +12,18 @@ struct ContentView: View {
 
     var body: some View {
         GridStack(rows: gameOfLive.universe.height, columns: gameOfLive.universe.width, content: { x, y in
-            Button(action: { gameOfLive.activateCell(x: x, y: y) }, label: {
-                CellView(
-                    isAlive: gameOfLive.universe.cellIsAlive(x: x, y: y),
-                    liveNeighborCount: gameOfLive.universe.liveNeighborCount(x: x, y: y))
-            })
-                .buttonStyle(.plain)
+            CellView(cell: gameOfLive.universe.getCell(x: x, y: y))
         })
             .frame(minWidth: 300, minHeight: 300)
     }
 }
 
 struct CellView: View {
-    let isAlive: Bool
-    let liveNeighborCount: Int
+    let cell: Universe.Cell
 
     var body: some View {
         ZStack {
-            isAlive ? Color.black : Color.white
-            Text("\(liveNeighborCount)")
-                .foregroundColor(isAlive ? Color.white : Color.black)
+            cell.color
         }
     }
 }
@@ -42,12 +34,6 @@ class GameOfLife: ObservableObject {
 
     init(universe: Universe) {
         self.universe = universe
-    }
-
-    func activateCell(x: Int, y: Int) {
-        withAnimation(.easeOut(duration: 0.2)) {
-            universe.activateCell(x: x, y: y)
-        }
     }
 
 }
@@ -66,13 +52,54 @@ struct Universe {
     enum Cell: UInt8 {
         case dead = 0
         case alive = 1
+
+        var isAlive: Bool { self == .alive }
+        var color: Color { isAlive ? .black : .white }
     }
 
-    func cellIsAlive(x: Int, y: Int) -> Bool {
-        cells[getIndex(x: x, y: y)] == .alive
+    mutating func tick() {
+        var next = cells
+
+        for row in 0..<height {
+            for column in 0..<width {
+                let index = getIndex(x: row, y: column)
+                let cell = getCell(x: row, y: column)
+                let liveNeighbors = liveNeighborCount(x: row, y: column)
+
+                let nextCell: Cell
+                switch (cell, liveNeighbors) {
+                    // Rule 1: Any live cell with fewer than two live neighbors
+                    // dies, as if caused by underpopulation.
+                case (.alive, let x) where x < 2: nextCell = .dead
+                    // Rule 2: Any live cell with two or three live neighbors
+                    // lives on to the next generation.
+                case (.alive, 2), (.alive, 3): nextCell = .alive
+                    // Rule 3: Any live cell with more than three live
+                    // neighbors dies, as if by overpopulation.
+                case (.alive, let x) where x > 3: nextCell = .dead
+                    // Rule 4: Any dead cell with exactly three live neighbors
+                    // becomes a live cell, as if by reproduction.
+                case (.dead, 3): nextCell = .alive
+                    // All other cells remain in the same state.
+                default: nextCell = cell
+                }
+
+                next[index] = nextCell
+            }
+        }
+
+        self.cells = next
     }
 
-    func liveNeighborCount(x: Int, y: Int) -> Int {
+    func getCell(x: Int, y: Int) -> Cell {
+        cells[getIndex(x: x, y: y)]
+    }
+
+    private mutating func activateCell(x: Int, y: Int) {
+        cells[getIndex(x: x, y: y)] = .alive
+    }
+
+    private func liveNeighborCount(x: Int, y: Int) -> Int {
         var count = 0
         for deltaRow in [height - 1, 0, 1] {
             for deltaColumn in [width - 1, 0, 1] {
@@ -82,16 +109,12 @@ struct Universe {
 
                 let neighborRow = (x + deltaRow) % height
                 let neighborColumn = (y + deltaColumn) % width
-                if cellIsAlive(x: neighborRow, y: neighborColumn) {
+                if getCell(x: neighborRow, y: neighborColumn).isAlive {
                     count += 1
                 }
             }
         }
         return count
-    }
-
-    mutating func activateCell(x: Int, y: Int) {
-        cells[getIndex(x: x, y: y)] = .alive
     }
 
     private func getIndex(x: Int, y: Int) -> Int {
