@@ -9,21 +9,65 @@ import SwiftUI
 import ShrimpExtensions
 
 struct ContentView: View {
-    @StateObject private var gameOfLive = GameOfLife(universe: .init(height: 64, width: 64))
+    @StateObject private var gameOfLive = GameOfLife(
+        universe: .init(height: Self.universeSize, width: Self.universeSize))
 
     var body: some View {
-        VStack {
-            GridStack(
-                rows: gameOfLive.universe.height,
-                columns: gameOfLive.universe.width,
-                spacing: 4,
-                content: { x, y in
-                    CellView(cell: gameOfLive.universe.getCell(x: x, y: y), size: .squared(4))
-                })
+        GeometryReader { geometry in
+            let size = cellSize(screenSize: geometry.size)
+
+            VStack {
+                #if !os(macOS)
+                if geometry.size.height > geometry.size.width {
+                    Spacer()
+                        .frame(height: geometry.size.height / 4)
+                }
+                #endif
+                HStack {
+                    #if !os(macOS)
+                    if geometry.size.width > geometry.size.height {
+                        Spacer()
+                            .frame(width: geometry.size.width / 4)
+                    }
+                    #endif
+                    GridStack(
+                        rows: gameOfLive.universe.height,
+                        columns: gameOfLive.universe.width,
+                        spacing: Self.gridSpacing,
+                        content: { x, y in
+                            CellView(
+                                cell: gameOfLive.universe.getCell(x: x, y: y),
+                                size: size)
+                        })
+                }
+            }
         }
         .padding(.all, 16)
-        .frame(minWidth: 300, minHeight: 300)
+        .frame(minWidth: 300, minHeight: 300, alignment: .center)
     }
+
+    private func cellSize(screenSize: CGSize) -> CGSize {
+        #if os(macOS)
+        return .squared(4)
+        #else
+        let universeSize = CGFloat(Self.universeSize)
+        var width = (screenSize.width / universeSize) - Self.gridSpacing
+        var height = (screenSize.height / universeSize) - Self.gridSpacing
+        if height > width {
+            if width < 0 {
+                width = 0
+            }
+            return CGSize(width: width, height: width)
+        }
+        if height < 0 {
+            height = 0
+        }
+        return CGSize(width: height, height: height)
+        #endif
+    }
+
+    private static let universeSize = 64
+    private static let gridSpacing: CGFloat = 4
 }
 
 struct CellView: View {
