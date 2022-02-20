@@ -42,13 +42,20 @@ struct ContentView: View {
                 }
             }
         }
-        .padding(.all, 16)
-        .frame(minWidth: 300, minHeight: 300, alignment: .center)
+        .padding(.all, Self.paddingSize)
+        #if os(macOS)
+        .frame(width: Self.screenSize.width, height: Self.screenSize.height)
+        #endif
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                gameOfLive.start()
+            }
+        })
     }
 
     private func cellSize(screenSize: CGSize) -> CGSize {
         #if os(macOS)
-        return .squared(4)
+        return .squared(Self.macCellSize)
         #else
         let universeSize = CGFloat(Self.universeSize)
         var width = (screenSize.width / universeSize) - Self.gridSpacing
@@ -68,6 +75,11 @@ struct ContentView: View {
 
     private static let universeSize = 64
     private static let gridSpacing: CGFloat = 4
+    private static let paddingSize: CGFloat = 16
+    #if os(macOS)
+    static let macCellSize: CGFloat = 4
+    static let screenSize: CGSize = .squared((CGFloat(universeSize) * (macCellSize + gridSpacing)) + (paddingSize * 2))
+    #endif
 }
 
 struct CellView: View {
@@ -86,6 +98,16 @@ class GameOfLife: ObservableObject {
 
     init(universe: Universe) {
         self.universe = universe
+    }
+
+    func start() {
+        let framePerSecond: TimeInterval = 5
+        Timer.scheduledTimer(timeInterval: 1 / framePerSecond, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+    }
+
+    @objc
+    private func tick(_ timer: Timer?) {
+        universe.tick()
     }
 
 }
