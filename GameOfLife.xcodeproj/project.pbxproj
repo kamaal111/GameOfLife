@@ -39,6 +39,10 @@
 		2C6D30D227C2D3CD004ECBDE /* ShrimpExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6D30D127C2D3CD004ECBDE /* ShrimpExtensions */; };
 		2C6D30D527C2D3D9004ECBDE /* ShrimpExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6D30D427C2D3D9004ECBDE /* ShrimpExtensions */; };
 		2C6D30D727C2D3E0004ECBDE /* ShrimpExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2C6D30D627C2D3E0004ECBDE /* ShrimpExtensions */; };
+		2C97275927C42B2100B2ED59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97275827C42B2100B2ED59 /* Constants.swift */; };
+		2C97275A27C42B2100B2ED59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97275827C42B2100B2ED59 /* Constants.swift */; };
+		2C97275B27C42B2100B2ED59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97275827C42B2100B2ED59 /* Constants.swift */; };
+		2C97275C27C42B2100B2ED59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C97275827C42B2100B2ED59 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +112,7 @@
 		2C6D30A327C2CCFD004ECBDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C6D30A527C2CCFD004ECBDE /* GameOfLife_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameOfLife_macOS.entitlements; sourceTree = "<group>"; };
 		2C6D30C827C2D037004ECBDE /* Universe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Universe.swift; sourceTree = "<group>"; };
+		2C97275827C42B2100B2ED59 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		60C3EF4B27C37EBC0018D99C /* GameOfLife-tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GameOfLife-tvOS-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +169,7 @@
 		2C6D305A27C2CCEB004ECBDE /* GameOfLife Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2C97275827C42B2100B2ED59 /* Constants.swift */,
 				2C6D305D27C2CCEB004ECBDE /* GameScene.swift */,
 				2C6D30C827C2D037004ECBDE /* Universe.swift */,
 				2C6D305E27C2CCFC004ECBDE /* Assets.xcassets */,
@@ -449,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C97275927C42B2100B2ED59 /* Constants.swift in Sources */,
 				2C6D30AD27C2CCFD004ECBDE /* GameScene.swift in Sources */,
 				2C6D306927C2CCFC004ECBDE /* GameViewController.swift in Sources */,
 				2C6D30C927C2D037004ECBDE /* Universe.swift in Sources */,
@@ -460,6 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C97275A27C42B2100B2ED59 /* Constants.swift in Sources */,
 				2C6D30AE27C2CCFD004ECBDE /* GameScene.swift in Sources */,
 				2C6D308627C2CCFD004ECBDE /* ExtensionDelegate.swift in Sources */,
 				2C6D30CA27C2D037004ECBDE /* Universe.swift in Sources */,
@@ -471,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C97275B27C42B2100B2ED59 /* Constants.swift in Sources */,
 				2C6D30AF27C2CCFD004ECBDE /* GameScene.swift in Sources */,
 				2C6D309127C2CCFD004ECBDE /* GameViewController.swift in Sources */,
 				2C6D30CB27C2D037004ECBDE /* Universe.swift in Sources */,
@@ -482,6 +491,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C97275C27C42B2100B2ED59 /* Constants.swift in Sources */,
 				2C6D30B027C2CCFD004ECBDE /* GameScene.swift in Sources */,
 				2C6D30A127C2CCFD004ECBDE /* GameViewController.swift in Sources */,
 				2C6D30CC27C2D037004ECBDE /* Universe.swift in Sources */,

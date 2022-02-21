@@ -8,12 +8,10 @@
 import SpriteKit
 import ShrimpExtensions
 
-private let UNIVERSE_SIZE = 4
-
 class GameScene: SKScene {
 
-    private var universe = Universe(height: UNIVERSE_SIZE, width: UNIVERSE_SIZE)
-    private var graphics = [SKShapeNode?](repeating: nil, count: UNIVERSE_SIZE * UNIVERSE_SIZE)
+    private var universe = Universe(height: Constants.universeSize, width: Constants.universeSize)
+    private var graphics = [SKShapeNode?](repeating: nil, count: Int(pow(Double(Constants.universeSize), 2)))
 
     class func newGameScene() -> GameScene {
         let scene = GameScene()
@@ -47,11 +45,11 @@ class GameScene: SKScene {
 
         let size = self.view?.frame.size ?? .squared(300)
         let minds = min(size.width, size.height)
-        let pixelSize: CGSize = .squared(minds / CGFloat(UNIVERSE_SIZE))
+        let pixelSize: CGSize = .squared(minds / CGFloat(Constants.universeSize))
 
         var newGraphics: [SKShapeNode] = []
         universe.cells
-            .chunks(UNIVERSE_SIZE)
+            .chunks(Constants.universeSize)
             .enumerated()
             .forEach({ x, cellChunk in
                 cellChunk
