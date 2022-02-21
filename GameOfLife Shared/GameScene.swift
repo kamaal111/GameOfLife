@@ -45,21 +45,38 @@ class GameScene: SKScene {
             $0?.removeFromParent()
         })
 
-        let pixelSize: CGSize = .squared(20)
         let size = self.view?.frame.size ?? .squared(300)
+        let minds = min(size.width, size.height)
+        let pixelSize: CGSize = .squared(minds / CGFloat(UNIVERSE_SIZE))
 
-        for x in 0..<UNIVERSE_SIZE {
-            for y in 0..<UNIVERSE_SIZE {
+        var newGraphics: [SKShapeNode] = []
+        universe.cells.chunks(UNIVERSE_SIZE).enumerated().forEach({ x, cellChunk in
+            cellChunk.enumerated().forEach { y, cell in
                 let xPoint = (CGFloat(x) * pixelSize.width)
                 let yPoint = size.height - (CGFloat(y) * pixelSize.height)
                 let nodePoint = CGPoint(x: xPoint, y: yPoint)
-                let cell = universe.getCell(x: x, y: y)
                 let node = cell.skNode(rect: CGRect(origin: nodePoint, size: pixelSize))
-
+                node.name = "(\(x),\(y))"
                 self.addChild(node)
-                graphics[x * UNIVERSE_SIZE + y] = node
+                newGraphics.append(node)
             }
-        }
+        })
+        graphics = newGraphics
     }
 
+}
+
+extension Array {
+    func chunks(_ size: Int) -> [[Element]] {
+        var arr: [[Element]] = []
+        var buffer: [Element] = []
+        for (index, item) in self.enumerated() {
+            buffer.append(item)
+            if (index + 1) % size == 0 {
+                arr.append(buffer)
+                buffer = []
+            }
+        }
+        return arr
+    }
 }

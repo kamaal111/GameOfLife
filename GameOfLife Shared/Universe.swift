@@ -13,7 +13,7 @@ import SpriteKit
 struct Universe {
     let height: Int
     let width: Int
-    private var cells: [Cell]
+    private(set) var cells: [Cell]
 
     private init(height: Int, width: Int, cells: [Cell]) {
         self.height = height
