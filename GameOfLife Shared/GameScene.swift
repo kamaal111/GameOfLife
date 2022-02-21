@@ -50,17 +50,22 @@ class GameScene: SKScene {
         let pixelSize: CGSize = .squared(minds / CGFloat(UNIVERSE_SIZE))
 
         var newGraphics: [SKShapeNode] = []
-        universe.cells.chunks(UNIVERSE_SIZE).enumerated().forEach({ x, cellChunk in
-            cellChunk.enumerated().forEach { y, cell in
-                let xPoint = (CGFloat(x) * pixelSize.width)
-                let yPoint = size.height - (CGFloat(y) * pixelSize.height)
-                let nodePoint = CGPoint(x: xPoint, y: yPoint)
-                let node = cell.skNode(rect: CGRect(origin: nodePoint, size: pixelSize))
-                node.name = "(\(x),\(y))"
-                self.addChild(node)
-                newGraphics.append(node)
-            }
-        })
+        universe.cells
+            .chunks(UNIVERSE_SIZE)
+            .enumerated()
+            .forEach({ x, cellChunk in
+                cellChunk
+                    .enumerated()
+                    .forEach { y, cell in
+                        let xPoint = (CGFloat(x) * pixelSize.width)
+                        let yPoint = size.height - (CGFloat(y) * pixelSize.height)
+                        let nodePoint = CGPoint(x: xPoint, y: yPoint)
+                        let node = cell.skNode(rect: CGRect(origin: nodePoint, size: pixelSize))
+                        node.name = "(\(x),\(y))"
+                        self.addChild(node)
+                        newGraphics.append(node)
+                    }
+            })
         graphics = newGraphics
     }
 
