@@ -64,6 +64,7 @@ class GameScene: SKScene {
                     .forEach { y, cell in
                         let xPoint = (CGFloat(x) * pixelSize.width)
                         let yPoint = size.height - (CGFloat(y) * pixelSize.height)
+                        print(xPoint, yPoint, (x,y), pixelSize)
                         let nodePoint = CGPoint(x: xPoint, y: yPoint)
                         let nodeRect = CGRect(origin: nodePoint, size: pixelSize)
                         let node = cell.skNode(rect: nodeRect)
@@ -73,9 +74,9 @@ class GameScene: SKScene {
                     }
             })
         graphics = newGraphics
-        graphics.forEach({ node in
-            print(node)
-        })
+//        graphics.forEach({ node in
+//            print(node?.name ?? "", node?.frame.origin ?? .zero, node?.userData ?? [:])
+//        })
     }
 
 }
