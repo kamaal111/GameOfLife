@@ -23,8 +23,8 @@ struct Universe {
 
     init(height: Int, width: Int) {
         let cells: [Cell] = (0..<(height * width))
-            .map({
-                if ($0 % 2) == 0 || ($0 % 7) == 0 {
+            .map({ _ in
+                if Bool.random() {
                     return .alive
                 }
                 return .dead
@@ -43,8 +43,7 @@ struct Universe {
         func skNode(rect: CGRect) -> SKShapeNode {
             let node = SKShapeNode(rect: rect)
             node.fillColor = color
-            node.strokeColor = .green
-            node.userData = ["is_alive": isAlive]
+            node.strokeColor = .clear
             return node
         }
         #endif

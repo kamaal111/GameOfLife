@@ -8,5 +8,5 @@
 import Foundation
 
 enum Constants {
-    static let universeSize = 2
+    static let universeSize = 32
 }

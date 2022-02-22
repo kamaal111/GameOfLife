@@ -25,7 +25,7 @@ class GameScene: SKScene {
         GameScene(size: size)
     }
 
-    func setUpScene() {
+    private func setUpScene() {
         initializeGrid()
     }
 
@@ -40,9 +40,17 @@ class GameScene: SKScene {
     #endif
 
     override func update(_ currentTime: TimeInterval) {
-//        universe.cells.enumerated().forEach({ index, cell in
-//            graphics[index]?.fillColor = [SKColor.red, SKColor.blue].randomElement()!
-//        })
+        universe.tick()
+        updateGrid()
+    }
+
+    private func updateGrid() {
+        universe.tick()
+        universe.cells
+            .enumerated()
+            .forEach({ index, cell in
+                graphics[index]?.fillColor = cell.color
+            })
     }
 
     private func initializeGrid() {
@@ -51,8 +59,9 @@ class GameScene: SKScene {
         })
 
         let size = self.view?.frame.size ?? .squared(300)
-        let minds = min(size.width, size.height)
-        let pixelSize: CGSize = .squared(minds / CGFloat(Constants.universeSize))
+        let pixelSize = CGSize(
+            width: size.width / CGFloat(Constants.universeSize),
+            height: size.height / CGFloat(Constants.universeSize))
 
         var newGraphics: [SKShapeNode] = []
         universe.cells
@@ -61,22 +70,18 @@ class GameScene: SKScene {
             .forEach({ x, cellChunk in
                 cellChunk
                     .enumerated()
-                    .forEach { y, cell in
+                    .forEach({ y, cell in
                         let xPoint = (CGFloat(x) * pixelSize.width)
-                        let yPoint = size.height - (CGFloat(y) * pixelSize.height)
-                        print(xPoint, yPoint, (x,y), pixelSize)
+                        let yPoint = (CGFloat(y) * pixelSize.height)
                         let nodePoint = CGPoint(x: xPoint, y: yPoint)
                         let nodeRect = CGRect(origin: nodePoint, size: pixelSize)
                         let node = cell.skNode(rect: nodeRect)
                         node.name = "(\(x),\(y))"
                         self.addChild(node)
                         newGraphics.append(node)
-                    }
+                    })
             })
         graphics = newGraphics
-//        graphics.forEach({ node in
-//            print(node?.name ?? "", node?.frame.origin ?? .zero, node?.userData ?? [:])
-//        })
     }
 
 }
