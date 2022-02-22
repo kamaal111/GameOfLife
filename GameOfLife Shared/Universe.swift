@@ -42,7 +42,7 @@ struct Universe {
 
         func skNode(rect: CGRect) -> SKShapeNode {
             let node = SKShapeNode(rect: rect)
-            node.fillColor = .red
+            node.fillColor = color
             node.strokeColor = .clear
             return node
         }

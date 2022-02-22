@@ -51,7 +51,6 @@ class GameScene: SKScene {
         })
 
         let size = self.view?.frame.size ?? .squared(300)
-        self.view?.scene?.backgroundColor = .brown
         let minds = min(size.width, size.height)
         let pixelSize: CGSize = .squared(minds / CGFloat(Constants.universeSize))
 
@@ -67,9 +66,7 @@ class GameScene: SKScene {
                         let yPoint = size.height - (CGFloat(y) * pixelSize.height)
                         let nodePoint = CGPoint(x: xPoint, y: yPoint)
                         let nodeRect = CGRect(origin: nodePoint, size: pixelSize)
-//                        let node = cell.skNode(rect: nodeRect)
-                        let node = SKShapeNode(rect: nodeRect)
-                        node.fillColor = cell.color
+                        let node = cell.skNode(rect: nodeRect)
                         node.name = "(\(x),\(y))"
                         self.addChild(node)
                         newGraphics.append(node)
