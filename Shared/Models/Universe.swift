@@ -75,6 +75,10 @@ struct Universe {
         cells = cells.map({ _ in .dead })
     }
 
+    mutating func randomizeCells() {
+        cells = cells.map({ _ in Bool.random() ? .alive : .dead })
+    }
+
     func getCell(x: Int, y: Int) -> Cell {
         cells[getIndex(x: x, y: y)]
     }

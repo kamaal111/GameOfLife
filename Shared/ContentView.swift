@@ -25,6 +25,9 @@ struct ContentView: View {
                         Button(action: { simulation.togglePlay() }) {
                             Image(systemName: simulation.isPaused ? "play.fill" : "pause.fill")
                         }
+                        Button(action: { simulation.randomizeCells() }) {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                        }
                         Button(action: { simulation.killAllCells() }) {
                             Text("☠️")
                         }

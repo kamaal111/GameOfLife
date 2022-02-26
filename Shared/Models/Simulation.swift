@@ -47,9 +47,17 @@ final class Simulation: ObservableObject {
         universe.killAllCells()
     }
 
+    func randomizeCells() {
+        pause()
+        universe.randomizeCells()
+        tick(nil)
+    }
+
+}
+
+extension Simulation {
     @objc
     private func tick(_ timer: Timer?) {
         universe.tick()
     }
-
 }
