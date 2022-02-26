@@ -6,17 +6,26 @@
 //
 
 import SwiftUI
+import SalmonUI
 import ShrimpExtensions
 
 struct ContentView: View {
     @StateObject private var simulation = Simulation(
         universe: .init(height: Constants.universeSize, width: Constants.universeSize))
 
+    @State private var controlCenterSize: CGSize = .zero
+
     var body: some View {
         GeometryReader { geometry in
             let size = cellSize(screenSize: geometry.size)
 
             VStack {
+                VStack {
+                    Button(action: { simulation.togglePlay() }) {
+                        Text(simulation.isPaused ? "play" : "pause")
+                    }
+                }
+                .kBindToFrameSize($controlCenterSize)
                 #if !os(macOS)
                 if geometry.size.height > geometry.size.width {
                     Spacer()
@@ -44,11 +53,11 @@ struct ContentView: View {
         }
         .padding(.all, Self.paddingSize)
         #if os(macOS)
-        .frame(width: Self.screenSize.width, height: Self.screenSize.height)
+        .frame(width: Self.screenSize.width, height: Self.screenSize.height + controlCenterSize.height)
         #endif
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                simulation.start()
+                simulation.play()
             }
         })
     }
@@ -57,16 +66,15 @@ struct ContentView: View {
         #if os(macOS)
         return .squared(Self.macCellSize)
         #else
-        let universeSize = CGFloat(Self.universeSize)
-        var width = (screenSize.width / universeSize) - Self.gridSpacing
-        var height = (screenSize.height / universeSize) - Self.gridSpacing
-        let smallestEdge = min(height, width)
-        guard smallestEdge >= 0 else { fatalError("got negative value as the smallest edge somehow") }
-        return .squared(smallestEdge)
+        let universeSize = CGFloat(Constants.universeSize)
+        let smallestEdge = min(screenSize.width, screenSize.height)
+        let size = (smallestEdge / universeSize) - Self.gridSpacing
+        guard size >= 0 else { fatalError("got negative value as the smallest edge somehow") }
+        return .squared(size)
         #endif
     }
 
-    private static let gridSpacing: CGFloat = 4
+    private static let gridSpacing: CGFloat = 1
     private static let paddingSize: CGFloat = 16
     #if os(macOS)
     static let macCellSize: CGFloat = 4

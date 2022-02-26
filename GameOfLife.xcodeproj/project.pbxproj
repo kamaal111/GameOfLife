@@ -25,6 +25,8 @@
 		2C0CB48127CAB04F000B2659 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CB47F27CAB04F000B2659 /* CellView.swift */; };
 		2C0CB48427CAB0A9000B2659 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CB48327CAB0A9000B2659 /* Simulation.swift */; };
 		2C0CB48527CAB0A9000B2659 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CB48327CAB0A9000B2659 /* Simulation.swift */; };
+		2C0CB48827CAB202000B2659 /* SalmonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0CB48727CAB202000B2659 /* SalmonUI */; };
+		2C0CB48A27CAB209000B2659 /* SalmonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0CB48927CAB209000B2659 /* SalmonUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0CB48827CAB202000B2659 /* SalmonUI in Frameworks */,
 				2C0CB47527CAAD01000B2659 /* ShrimpExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0CB48A27CAB209000B2659 /* SalmonUI in Frameworks */,
 				2C0CB47827CAAD09000B2659 /* ShrimpExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +156,7 @@
 			name = "GameOfLife (iOS)";
 			packageProductDependencies = (
 				2C0CB47427CAAD01000B2659 /* ShrimpExtensions */,
+				2C0CB48727CAB202000B2659 /* SalmonUI */,
 			);
 			productName = "GameOfLife (iOS)";
 			productReference = 2C0CB45627CAAAE7000B2659 /* GameOfLife.app */;
@@ -172,6 +177,7 @@
 			name = "GameOfLife (macOS)";
 			packageProductDependencies = (
 				2C0CB47727CAAD09000B2659 /* ShrimpExtensions */,
+				2C0CB48927CAB209000B2659 /* SalmonUI */,
 			);
 			productName = "GameOfLife (macOS)";
 			productReference = 2C0CB45C27CAAAE7000B2659 /* GameOfLife.app */;
@@ -206,6 +212,7 @@
 			mainGroup = 2C0CB44927CAAADB000B2659;
 			packageReferences = (
 				2C0CB47327CAAD01000B2659 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */,
+				2C0CB48627CAB202000B2659 /* XCRemoteSwiftPackageReference "SalmonUI" */,
 			);
 			productRefGroup = 2C0CB45727CAAAE7000B2659 /* Products */;
 			projectDirPath = "";
@@ -537,6 +544,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		2C0CB48627CAB202000B2659 /* XCRemoteSwiftPackageReference "SalmonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kamaal111/SalmonUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -549,6 +564,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C0CB47327CAAD01000B2659 /* XCRemoteSwiftPackageReference "ShrimpExtensions" */;
 			productName = ShrimpExtensions;
+		};
+		2C0CB48727CAB202000B2659 /* SalmonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C0CB48627CAB202000B2659 /* XCRemoteSwiftPackageReference "SalmonUI" */;
+			productName = SalmonUI;
+		};
+		2C0CB48927CAB209000B2659 /* SalmonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C0CB48627CAB202000B2659 /* XCRemoteSwiftPackageReference "SalmonUI" */;
+			productName = SalmonUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
