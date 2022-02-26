@@ -27,6 +27,12 @@ class GameScene: SKScene {
 
     private func setUpScene() {
         initializeGrid()
+        Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(simulateCells),
+            userInfo: nil,
+            repeats: true)
     }
 
     #if os(watchOS)
@@ -39,7 +45,10 @@ class GameScene: SKScene {
     }
     #endif
 
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ currentTime: TimeInterval) { }
+
+    @objc
+    private func simulateCells(_ timer: Timer?) {
         universe.tick()
         updateGrid()
     }
