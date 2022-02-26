@@ -35,6 +35,7 @@ struct Universe {
 
         var isAlive: Bool { self == .alive }
         var color: Color { isAlive ? .black : .white }
+        var int: Int { isAlive ? 1 : 0 }
     }
 
     mutating func tick() {
@@ -88,19 +89,27 @@ extension Universe {
     private func liveNeighborCount(x: Int, y: Int) -> Int {
         var count = 0
 
-        for deltaRow in [(height - 1), 0, 1] {
-            for deltaColumn in [(width - 1), 0, 1] {
-                if deltaRow == 0 && deltaColumn == 0 {
-                    continue
-                }
+        let north = x == 0 ? (height - 1) : (x - 1)
+        let south = x == (height - 1) ? 0 : (x + 1)
+        let west = y == 0 ? (width - 1) : (y - 1)
+        let east = y == (width - 1) ? 0 : (y + 1)
 
-                let neighborRow = (x + deltaRow) % height
-                let neighborColumn = (y + deltaColumn) % width
-                if getCell(x: neighborRow, y: neighborColumn).isAlive {
-                    count += 1
-                }
-            }
-        }
+        let nw = getCell(x: north, y: west)
+        count += nw.int
+        let n = getCell(x: north, y: y)
+        count += n.int
+        let ne = getCell(x: north, y: east)
+        count += ne.int
+        let w = getCell(x: x, y: west)
+        count += w.int
+        let e = getCell(x: x, y: east)
+        count += e.int
+        let sw = getCell(x: south, y: west)
+        count += sw.int
+        let s = getCell(x: south, y: y)
+        count += s.int
+        let se = getCell(x: south, y: east)
+        count += se.int
 
         return count
     }
