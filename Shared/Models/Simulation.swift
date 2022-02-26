@@ -42,6 +42,11 @@ final class Simulation: ObservableObject {
             repeats: true)
     }
 
+    func killAllCells() {
+        pause()
+        universe.killAllCells()
+    }
+
     @objc
     private func tick(_ timer: Timer?) {
         universe.tick()

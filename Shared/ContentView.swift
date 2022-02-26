@@ -21,8 +21,13 @@ struct ContentView: View {
 
             VStack {
                 VStack {
-                    Button(action: { simulation.togglePlay() }) {
-                        Text(simulation.isPaused ? "play" : "pause")
+                    HStack {
+                        Button(action: { simulation.togglePlay() }) {
+                            Image(systemName: simulation.isPaused ? "play.fill" : "pause.fill")
+                        }
+                        Button(action: { simulation.killAllCells() }) {
+                            Text("☠️")
+                        }
                     }
                 }
                 .kBindToFrameSize($controlCenterSize)

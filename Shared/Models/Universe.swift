@@ -71,6 +71,10 @@ struct Universe {
         self.cells = next
     }
 
+    mutating func killAllCells() {
+        cells = cells.map({ _ in .dead })
+    }
+
     func getCell(x: Int, y: Int) -> Cell {
         cells[getIndex(x: x, y: y)]
     }
