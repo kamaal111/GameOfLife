@@ -2,13 +2,10 @@
 //  Universe.swift
 //  GameOfLife
 //
-//  Created by Kamaal M Farah on 20/02/2022.
+//  Created by Kamaal M Farah on 26/02/2022.
 //
 
-import Foundation
-#if canImport(SpriteKit)
-import SpriteKit
-#endif
+import SwiftUI
 
 struct Universe {
     let height: Int
@@ -37,16 +34,7 @@ struct Universe {
         case alive = 1
 
         var isAlive: Bool { self == .alive }
-        #if canImport(SpriteKit)
-        var color: SKColor { isAlive ? .black : .white }
-
-        func skNode(rect: CGRect) -> SKShapeNode {
-            let node = SKShapeNode(rect: rect)
-            node.fillColor = color
-            node.strokeColor = .clear
-            return node
-        }
-        #endif
+        var color: Color { isAlive ? .black : .white }
     }
 
     mutating func tick() {
@@ -86,9 +74,12 @@ struct Universe {
     func getCell(x: Int, y: Int) -> Cell {
         cells[getIndex(x: x, y: y)]
     }
+}
 
+extension Universe {
     private func liveNeighborCount(x: Int, y: Int) -> Int {
         var count = 0
+
         for deltaRow in [(height - 1), 0, 1] {
             for deltaColumn in [(width - 1), 0, 1] {
                 if deltaRow == 0 && deltaColumn == 0 {
@@ -102,6 +93,7 @@ struct Universe {
                 }
             }
         }
+
         return count
     }
 
