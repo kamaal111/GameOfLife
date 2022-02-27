@@ -11,9 +11,22 @@ final class Simulation: ObservableObject {
 
     @Published private(set) var universe: Universe
     @Published private var currentTimer: Timer?
+    @Published var pointerMode: PointerMode = .singleCell
 
     init(universe: Universe) {
         self.universe = universe
+    }
+
+    enum PointerMode: CaseIterable {
+        case singleCell
+
+        var string: String {
+            Self.stringMapping[self]!
+        }
+
+        private static let stringMapping: [PointerMode: String] = [
+            .singleCell: "Single Cell"
+        ]
     }
 
     var isPaused: Bool { currentTimer == nil }
@@ -43,7 +56,9 @@ final class Simulation: ObservableObject {
     }
 
     func toggleCell(x: Int, y: Int) {
-        universe.toggleCell(x: x, y: y)
+        switch pointerMode {
+        case .singleCell: universe.toggleCell(x: x, y: y)
+        }
     }
 
     func killAllCells() {

@@ -12,8 +12,7 @@ import ShrimpExtensions
 struct ContentView: View {
     @StateObject private var simulation = Simulation(
         universe: .init(height: Constants.universeSize, width: Constants.universeSize))
-
-    @State private var controlCenterSize: CGSize = .zero
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         GeometryReader { geometry in
@@ -32,8 +31,13 @@ struct ContentView: View {
                             Text("☠️")
                         }
                     }
+                    Picker("Pointer Mode", selection: $simulation.pointerMode) {
+                        ForEach(Simulation.PointerMode.allCases, id: \.self) { pointerMode in
+                            Text(pointerMode.string)
+                        }
+                    }
                 }
-                .kBindToFrameSize($controlCenterSize)
+                .kBindToFrameSize($viewModel.controlCenterSize)
                 #if !os(macOS)
                 if geometry.size.height > geometry.size.width {
                     Spacer()
@@ -62,7 +66,7 @@ struct ContentView: View {
         }
         .padding(.all, Self.paddingSize)
         #if os(macOS)
-        .frame(width: Self.screenSize.width, height: Self.screenSize.height + controlCenterSize.height)
+        .frame(width: Self.screenSize.width, height: Self.screenSize.height + viewModel.controlCenterSize.height)
         #endif
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
