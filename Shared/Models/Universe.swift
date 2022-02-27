@@ -19,13 +19,7 @@ struct Universe {
     }
 
     init(height: Int, width: Int) {
-        let cells: [Cell] = (0..<(height * width))
-            .map({ _ in
-                if Bool.random() {
-                    return .alive
-                }
-                return .dead
-            })
+        let cells: [Cell] = (0..<(height * width)).map({ _ in Bool.random() ? .alive : .dead })
         self.init(height: height, width: width, cells: cells)
     }
 
@@ -36,15 +30,19 @@ struct Universe {
         var isAlive: Bool { self == .alive }
         var color: Color { isAlive ? .black : .white }
         var int: Int { isAlive ? 1 : 0 }
+
+        fileprivate mutating func toggle() {
+            self = isAlive ? .dead : .alive
+        }
     }
 
     mutating func tick() {
         var next = cells
 
-        for row in 0..<height {
-            for column in 0..<width {
-                let cell = getCell(x: row, y: column)
-                let liveNeighbors = liveNeighborCount(x: row, y: column)
+        for x in 0..<height {
+            for y in 0..<width {
+                let cell = getCell(x: x, y: y)
+                let liveNeighbors = liveNeighborCount(x: x, y: y)
 
                 let nextCell: Cell
                 switch (cell, liveNeighbors) {
@@ -64,12 +62,16 @@ struct Universe {
                 default: nextCell = cell
                 }
 
-                let index = getIndex(x: row, y: column)
+                let index = getIndex(x: x, y: y)
                 next[index] = nextCell
             }
         }
 
         self.cells = next
+    }
+
+    mutating func toggleCell(x: Int, y: Int) {
+        cells[getIndex(x: x, y: y)].toggle()
     }
 
     mutating func killAllCells() {

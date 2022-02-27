@@ -42,6 +42,10 @@ final class Simulation: ObservableObject {
             repeats: true)
     }
 
+    func toggleCell(x: Int, y: Int) {
+        universe.toggleCell(x: x, y: y)
+    }
+
     func killAllCells() {
         pause()
         universe.killAllCells()

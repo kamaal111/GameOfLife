@@ -10,10 +10,14 @@ import SwiftUI
 struct CellView: View {
     let cell: Universe.Cell
     let size: CGSize
+    let action: () -> Void
 
     var body: some View {
         cell.color
             .frame(width: size.width, height: size.height)
+            .onTapGesture(perform: {
+                action()
+            })
     }
 }
 
@@ -22,7 +26,7 @@ import ShrimpExtensions
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(cell: .alive, size: .squared(4))
+        CellView(cell: .alive, size: .squared(4), action: { })
     }
 }
 #endif

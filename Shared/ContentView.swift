@@ -54,7 +54,8 @@ struct ContentView: View {
                         content: { x, y in
                             CellView(
                                 cell: simulation.universe.getCell(x: x, y: y),
-                                size: size)
+                                size: size,
+                                action: { simulation.toggleCell(x: x, y: y) })
                         })
                 }
             }
