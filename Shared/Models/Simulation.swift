@@ -19,13 +19,15 @@ final class Simulation: ObservableObject {
 
     enum PointerMode: CaseIterable {
         case singleCell
+        case glider
 
         var string: String {
             Self.stringMapping[self]!
         }
 
         private static let stringMapping: [PointerMode: String] = [
-            .singleCell: "Single Cell"
+            .singleCell: "Single Cell",
+            .glider: "Glider"
         ]
     }
 
@@ -58,6 +60,7 @@ final class Simulation: ObservableObject {
     func toggleCell(x: Int, y: Int) {
         switch pointerMode {
         case .singleCell: universe.toggleCell(x: x, y: y)
+        case .glider: universe.insertGlider(x: x, y: y)
         }
     }
 

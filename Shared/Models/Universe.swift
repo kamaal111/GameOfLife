@@ -74,6 +74,39 @@ struct Universe {
         cells[getIndex(x: x, y: y)].toggle()
     }
 
+    mutating func insertGlider(x: Int, y: Int) {
+        let correctedX: Int
+        if x == 0 {
+            correctedX = 1
+        } else if x >= (height - 1) {
+            correctedX = x - 1
+        } else {
+            correctedX = x
+        }
+
+        let correctedY: Int
+        if y == 0 {
+            correctedY = 1
+        } else if y >= (width - 1) {
+            correctedY = y - 1
+        } else {
+            correctedY = y
+        }
+
+        var newCells = cells
+        for row in 0..<3 {
+            for column in 0..<3 {
+                let index = getIndex(x: (correctedX + row) - 1, y: (correctedY + column) - 1)
+                let isTopEdges = row == 0 && column != 0
+                let isCenter = row == 1 && column == 1
+                let isLeft = row == 1 && column == 0
+                newCells[index] = (!isTopEdges && !isCenter && !isLeft) ? .alive : .dead
+            }
+        }
+
+        cells = newCells
+    }
+
     mutating func killAllCells() {
         cells = cells.map({ _ in .dead })
     }
