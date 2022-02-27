@@ -2,13 +2,10 @@
 //  Universe.swift
 //  GameOfLife
 //
-//  Created by Kamaal M Farah on 20/02/2022.
+//  Created by Kamaal M Farah on 26/02/2022.
 //
 
-import Foundation
-#if canImport(SpriteKit)
-import SpriteKit
-#endif
+import SwiftUI
 
 struct Universe {
     let height: Int
@@ -37,16 +34,8 @@ struct Universe {
         case alive = 1
 
         var isAlive: Bool { self == .alive }
-        #if canImport(SpriteKit)
-        var color: SKColor { isAlive ? .black : .white }
-
-        func skNode(rect: CGRect) -> SKShapeNode {
-            let node = SKShapeNode(rect: rect)
-            node.fillColor = color
-            node.strokeColor = .clear
-            return node
-        }
-        #endif
+        var color: Color { isAlive ? .black : .white }
+        var int: Int { isAlive ? 1 : 0 }
     }
 
     mutating func tick() {
@@ -83,25 +72,45 @@ struct Universe {
         self.cells = next
     }
 
+    mutating func killAllCells() {
+        cells = cells.map({ _ in .dead })
+    }
+
+    mutating func randomizeCells() {
+        cells = cells.map({ _ in Bool.random() ? .alive : .dead })
+    }
+
     func getCell(x: Int, y: Int) -> Cell {
         cells[getIndex(x: x, y: y)]
     }
+}
 
+extension Universe {
     private func liveNeighborCount(x: Int, y: Int) -> Int {
         var count = 0
-        for deltaRow in [(height - 1), 0, 1] {
-            for deltaColumn in [(width - 1), 0, 1] {
-                if deltaRow == 0 && deltaColumn == 0 {
-                    continue
-                }
 
-                let neighborRow = (x + deltaRow) % height
-                let neighborColumn = (y + deltaColumn) % width
-                if getCell(x: neighborRow, y: neighborColumn).isAlive {
-                    count += 1
-                }
-            }
-        }
+        let north = x == 0 ? (height - 1) : (x - 1)
+        let south = x == (height - 1) ? 0 : (x + 1)
+        let west = y == 0 ? (width - 1) : (y - 1)
+        let east = y == (width - 1) ? 0 : (y + 1)
+
+        let nw = getCell(x: north, y: west)
+        count += nw.int
+        let n = getCell(x: north, y: y)
+        count += n.int
+        let ne = getCell(x: north, y: east)
+        count += ne.int
+        let w = getCell(x: x, y: west)
+        count += w.int
+        let e = getCell(x: x, y: east)
+        count += e.int
+        let sw = getCell(x: south, y: west)
+        count += sw.int
+        let s = getCell(x: south, y: y)
+        count += s.int
+        let se = getCell(x: south, y: east)
+        count += se.int
+
         return count
     }
 
